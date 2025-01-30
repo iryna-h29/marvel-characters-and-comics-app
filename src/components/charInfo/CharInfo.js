@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 const CharInfo = () => {
     const [char, setChar] = useState(null);
     
-    const {loading, error, getCharacter, clearError} = useMarvelService();
+    const {loading, error, getCharacter, clearError, process, setProcess} = useMarvelService();
 
     const context = useContext(charContext);
 
@@ -42,25 +42,41 @@ const CharInfo = () => {
         // props.charId
         getCharacter(context.selectedChar)
             .then(onCharLoaded)
+            .then(() => setProcess('confirmed'))
     }
 
     const onCharLoaded = (char) => {
         setChar(char);
     }
 
+    const setContent = (process, char) => {
+        switch (process) {
+            case 'waiting':
+                return <Skeleton/>;
+                break;
+            case 'loading':
+                return <Spinner/>;
+                break;
+            case 'confirmed':
+                return <View char={char}/>;
+                break;
+            case 'error':
+                return <ErrorMessage/>;
+                break;
+            default:
+                throw new Error('Unexpected process state');
+        }
+    }
 
-    const skeleton = char || loading || error ? null : <Skeleton/>;
 
-    const errorMessage = error ? <ErrorMessage/> : null;
-    const spinner = loading ? <Spinner/> : null;
-    const content = !(loading || error || !char) ? <View char={char}/> : null;
+    // const skeleton = char || loading || error ? null : <Skeleton/>;
+    // const spinner = loading ? <Spinner/> : null;
+    // const content = !(loading || error || !char) ? <View char={char}/> : null;
+    // const errorMessage = error ? <ErrorMessage/> : null;
 
     return (
         <div className="char__info">
-            {skeleton}
-            {errorMessage}
-            {spinner}
-            {content}
+            {setContent(process, char)}
         </div>
     )
 }
