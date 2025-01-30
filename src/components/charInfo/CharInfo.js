@@ -1,18 +1,16 @@
 import { useEffect, useState, useContext } from 'react';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom';
-import Spinner from "../spinner/Spinner";
-import ErrorMessage from '../errorMessage/ErrorMessage';
-import Skeleton from '../skeleton/Skeleton';
 import useMarvelService from '../../services/MarvelService';
 import charContext from '../../context/context';
+import setContent from '../../utils/setContent';
 import './charInfo.scss';
 import PropTypes from 'prop-types';
 
 const CharInfo = () => {
     const [char, setChar] = useState(null);
     
-    const {loading, error, getCharacter, clearError, process, setProcess} = useMarvelService();
+    const {getCharacter, clearError, process, setProcess} = useMarvelService();
 
     const context = useContext(charContext);
 
@@ -49,26 +47,7 @@ const CharInfo = () => {
         setChar(char);
     }
 
-    const setContent = (process, char) => {
-        switch (process) {
-            case 'waiting':
-                return <Skeleton/>;
-                break;
-            case 'loading':
-                return <Spinner/>;
-                break;
-            case 'confirmed':
-                return <View char={char}/>;
-                break;
-            case 'error':
-                return <ErrorMessage/>;
-                break;
-            default:
-                throw new Error('Unexpected process state');
-        }
-    }
-
-
+    
     // const skeleton = char || loading || error ? null : <Skeleton/>;
     // const spinner = loading ? <Spinner/> : null;
     // const content = !(loading || error || !char) ? <View char={char}/> : null;
@@ -76,13 +55,15 @@ const CharInfo = () => {
 
     return (
         <div className="char__info">
-            {setContent(process, char)}
+            {setContent(process, View, char)}
         </div>
     )
 }
-const View = ({char}) => {
+
+
+const View = ({data}) => {
     const context = useContext(charContext);
-    const {id, name, description, thumbnail, homepage, wiki, comics} = char;
+    const {id, name, description, thumbnail, homepage, wiki, comics} = data;
     const imageAvailability = !thumbnail.includes('image_not_available') ? {'objectFit' : 'cover'} : {'objectFit' : 'contain'};
     return (
         <>

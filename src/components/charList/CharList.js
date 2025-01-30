@@ -4,6 +4,7 @@ import Spinner from "../spinner/Spinner";
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import useMarvelService from '../../services/MarvelService';
 import charContext from '../../context/context';
+import setContent from '../../utils/setContent';
 import './charList.scss';
 
 const CharList = () => {
