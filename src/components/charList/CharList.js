@@ -129,7 +129,7 @@ const CharItem = (props) => {
 
     
     return (
-        <li ref={myRef} className="char__item" tabIndex={0} onFocus={() => context.changeChar(id)}>
+        <li ref={myRef} className="char__item" tabIndex={0} onClick={() => context.changeChar(id)}>
             <img src={thumbnail} alt={name} style={imageAvailability}/>
             <div className="char__name">{name}</div>
         </li>

@@ -2,10 +2,10 @@ import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
 
 import useMarvelService from '../../services/MarvelService';
-import Spinner from '../spinner/Spinner';
-import ErrorMessage from '../errorMessage/ErrorMessage';
 import AppBanner from "../appBanner/AppBanner";
 import charContext from '../../context/context';
+import setContent from '../../utils/setContent';
+
 
 
 // Хотелось бы вынести функцию по загрузке данных как отдельный аргумент
@@ -15,8 +15,8 @@ import charContext from '../../context/context';
 const SinglePage = ({Component, dataType}) => {
         const {id} = useParams();
         const [data, setData] = useState(null);
-        const {loading, error, getComics, getCharacter, clearError} = useMarvelService();
-        const context = useContext(charContext);
+        const {getComics, getCharacter, clearError, process, setProcess} = useMarvelService();
+        // const context = useContext(charContext);
 
 
         useEffect(() => {
@@ -28,10 +28,10 @@ const SinglePage = ({Component, dataType}) => {
 
             switch (dataType) {
                 case 'comic':
-                    getComics(id).then(onDataLoaded);
+                    getComics(id).then(onDataLoaded).then(() => setProcess('confirmed'));
                     break;
                 case 'character':
-                    getCharacter(id).then(onDataLoaded);
+                    getCharacter(id).then(onDataLoaded).then(() => setProcess('confirmed'));
             }
         }
 
@@ -39,16 +39,12 @@ const SinglePage = ({Component, dataType}) => {
             setData(data);
         }
 
-        const errorMessage = error ? <ErrorMessage/> : null;
-        const spinner = loading ? <Spinner/> : null;
-        const content = !(loading || error || !data) ? <Component data={data}/> : null;
+        
 
         return (
             <>
                 <AppBanner/>
-                {errorMessage}
-                {spinner}
-                {content}
+                {setContent(process, Component, data)}
             </>
         )
 }
