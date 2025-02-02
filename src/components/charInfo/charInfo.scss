@@ -48,9 +48,9 @@
             position: relative;
             margin-top: 10px;
             max-height: 15vh;
-            overflow-y: scroll;
             scrollbar-color: $main-color transparent;
         }
+
         &-item {
             width: 100%;
             padding: 0px 10px;

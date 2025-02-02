@@ -62,9 +62,9 @@ const CharInfo = () => {
 
 
 const View = ({data}) => {
-    const context = useContext(charContext);
     const {id, name, description, thumbnail, homepage, wiki, comics} = data;
     const imageAvailability = !thumbnail.includes('image_not_available') ? {'objectFit' : 'cover'} : {'objectFit' : 'contain'};
+    const scrolledListStyles = Array.isArray(comics) && comics.length > 1 ? {'overflowY' : 'scroll'} : null;
     return (
         <>
             <Helmet>
@@ -92,12 +92,12 @@ const View = ({data}) => {
                 {description}
             </div>
             <div className="char__comics">Comics:</div>
-            <ul className="char__comics-list">
+            <ul className="char__comics-list" style={scrolledListStyles}>
                 {
                     Array.isArray(comics) 
                     ? comics.map((item, i) => {
                         return (
-                            <Link to={`/comics/${item.resourceURI.split('/').pop()}`} key={i} className="char__comics-item" onClick={context.OnBackToComics}>
+                            <Link to={`/comics/${item.resourceURI.split('/').pop()}`} key={i} className="char__comics-item">
                                 {item.name}
                             </Link>
                         )
