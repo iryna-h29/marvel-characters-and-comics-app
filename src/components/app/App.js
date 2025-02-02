@@ -24,16 +24,22 @@ const App = () => {
     
     const [charObj, setChar] = useState({
         selectedChar: null,
-        backToComics: false,
+        limit: 9,
         changeChar: changeChar,
-        OnBackToComics: OnBackToComics,
-        OffBackToComics: OffBackToComics
+        changeLimit: changeLimit
     });
+
     
     function changeChar(newChar) {
         setChar({
             ...charObj,
             selectedChar: newChar
+        })
+    }
+    function changeLimit(num) {
+        setChar({
+            ...charObj,
+            limit: num
         })
     }
     function OnBackToComics() {

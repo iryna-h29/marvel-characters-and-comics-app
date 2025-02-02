@@ -1,9 +1,8 @@
 import { useParams, Link } from 'react-router-dom';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 
 import useMarvelService from '../../services/MarvelService';
 import AppBanner from "../appBanner/AppBanner";
-import charContext from '../../context/context';
 import setContent from '../../utils/setContent';
 
 
@@ -16,7 +15,6 @@ const SinglePage = ({Component, dataType}) => {
         const {id} = useParams();
         const [data, setData] = useState(null);
         const {getComics, getCharacter, clearError, process, setProcess} = useMarvelService();
-        // const context = useContext(charContext);
 
 
         useEffect(() => {

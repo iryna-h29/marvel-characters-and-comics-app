@@ -1,13 +1,25 @@
 import { useEffect, useState, useContext } from 'react';
 import { Helmet } from "react-helmet";
-import { useParams, Link } from 'react-router-dom';
-import charContext from '../../context/context';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+
 
 import './singleComicPage.scss';
 
 const SingleComicPage = ({data}) => {
+    const [back, setBack] = useState(false);
     const {title, description, pageCount, thumbnail, language, price} = data;
-    const context = useContext(charContext);
+    let navigate = useNavigate();
+
+    const goBack = () => {
+        setBack(true);
+    }
+    
+    useEffect(() => {
+        if (back) {
+            navigate(-1);
+        }
+    }, [back]);
+
 
     return (
         <div className="single-comic">
@@ -26,7 +38,7 @@ const SingleComicPage = ({data}) => {
                 <p className="single-comic__descr">Language: {language}</p>
                 <div className="single-comic__price">{price}</div>
             </div>
-            <Link to="/comics" className="single-comic__back">Back to all</Link>
+            <button onClick={() => goBack()} className="single-comic__back">Back to all</button>
         </div>
     )
 }

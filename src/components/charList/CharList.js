@@ -32,6 +32,7 @@ const CharList = () => {
     const [offset, setOffset] = useState(210);
     const [charEnded, setCharEnded] = useState(false);
 
+    const context = useContext(charContext);
     const {getAllCharacters, process, setProcess} = useMarvelService();
 
     useEffect(() => {
@@ -42,10 +43,15 @@ const CharList = () => {
         }
     }, []);
 
+    // useEffect(() => {
+    //     context.changeLimit(charList.length); 
+    // }, [charList])
+
 
     const onRequest = (offset, initial) => {
         initial ? setNewItemLoading(false) : setNewItemLoading(true);
-        getAllCharacters(offset)
+        const limit = initial ? context.limit : 9;
+        getAllCharacters(offset, limit)
             .then(onCharLoaded)
             .then(() => setProcess('confirmed'))
     }
@@ -123,6 +129,7 @@ const CharItem = (props) => {
         if (myRef?.current) {
             if (id === context.selectedChar) {
                 myRef.current.classList.add('char__item-selected');
+                myRef.current.focus();
             }
         }
       }, [myRef]);
