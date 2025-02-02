@@ -32,7 +32,7 @@ const CharList = () => {
     const [offset, setOffset] = useState(210);
     const [charEnded, setCharEnded] = useState(false);
 
-    const {loading, error, getAllCharacters, process, setProcess} = useMarvelService();
+    const {getAllCharacters, process, setProcess} = useMarvelService();
 
     useEffect(() => {
         onRequest(offset, true);
@@ -122,14 +122,22 @@ const CharItem = (props) => {
     useEffect(() => {
         if (myRef?.current) {
             if (id === context.selectedChar) {
-                myRef.current.focus();
+                myRef.current.classList.add('char__item-selected');
             }
         }
       }, [myRef]);
 
     
     return (
-        <li ref={myRef} className="char__item" tabIndex={0} onClick={() => context.changeChar(id)}>
+        <li ref={myRef} 
+            className="char__item" 
+            tabIndex={0} 
+            onClick={() => context.changeChar(id)}
+            onKeyUp={(e) => {
+                if (e.key === "Enter") {
+                    context.changeChar(id)
+                }
+            }}>
             <img src={thumbnail} alt={name} style={imageAvailability}/>
             <div className="char__name">{name}</div>
         </li>
