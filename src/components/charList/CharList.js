@@ -4,8 +4,27 @@ import Spinner from "../spinner/Spinner";
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import useMarvelService from '../../services/MarvelService';
 import charContext from '../../context/context';
-import setContent from '../../utils/setContent';
 import './charList.scss';
+
+const setContent = (process, Component, newItemLoading) => {
+    switch (process) {
+        case 'waiting':
+            return <Spinner/>;
+            break;
+        case 'loading':
+            return newItemLoading ? <Component/> : <Spinner/>;
+            break;
+        case 'confirmed':
+            return <Component/>;
+            break;
+        case 'error':
+            return <ErrorMessage/>;
+            break;
+        default:
+            throw new Error('Unexpected process state');
+    }
+}
+
 
 const CharList = () => {
     const [charList, setCharList] = useState([]);
@@ -13,7 +32,7 @@ const CharList = () => {
     const [offset, setOffset] = useState(210);
     const [charEnded, setCharEnded] = useState(false);
 
-    const {loading, error, getAllCharacters} = useMarvelService();
+    const {loading, error, getAllCharacters, process, setProcess} = useMarvelService();
 
     useEffect(() => {
         onRequest(offset, true);
@@ -28,6 +47,7 @@ const CharList = () => {
         initial ? setNewItemLoading(false) : setNewItemLoading(true);
         getAllCharacters(offset)
             .then(onCharLoaded)
+            .then(() => setProcess('confirmed'))
     }
 
     const onCharLoaded = (newList) => {
@@ -52,21 +72,34 @@ const CharList = () => {
             onRequest(offset);
         }
     };
-
     
-    const errorMessage = error ? <ErrorMessage/> : null;
-    const spinner = loading && !newItemLoading ? <Spinner/> : null;
-    const content = charList.map(item => <CSSTransition key={item.id} timeout={500} classNames="char__item"><CharItem item={item}/></CSSTransition>);
-    // charId={selectedChar}
-    return (
-        <div className="char__list">
-                {spinner}
-                {errorMessage}
+    const renderItems = arr => {
+        const items =  arr.map((item, i) => {
+            let imgStyle = {'objectFit' : 'cover'};
+            if (item.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
+                imgStyle = {'objectFit' : 'unset'};
+            }
+            
+            return (
+                <CSSTransition key={item.id} timeout={500} classNames="char__item">
+                    <CharItem item={item}/>
+                </CSSTransition>
+            )
+        });
+
+        return (
             <ul className="char__grid">
                 <TransitionGroup component={null}>
-                    {content}
+                    {items}
                 </TransitionGroup>
             </ul>
+        )
+    }
+
+
+    return (
+        <div className="char__list">
+            {setContent(process, () => renderItems(charList), newItemLoading)}
             <button 
                 className="button button__main button__long"
                 disabled={newItemLoading}
