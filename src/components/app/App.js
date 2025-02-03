@@ -31,16 +31,16 @@ const App = () => {
 
     
     function changeChar(newChar) {
-        setChar({
+        setChar(charObj => ({
             ...charObj,
             selectedChar: newChar
-        })
+        }))
     }
     function changeLimit(num) {
-        setChar({
+        setChar(charObj => ({
             ...charObj,
             limit: num
-        })
+        }))
     }
     function OnBackToComics() {
         setChar(charObj => ({

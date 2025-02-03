@@ -43,9 +43,9 @@ const CharList = () => {
         }
     }, []);
 
-    // useEffect(() => {
-    //     context.changeLimit(charList.length); 
-    // }, [charList])
+    useEffect(() => {
+        context.changeLimit(charList.length); 
+    }, [charList])
 
 
     const onRequest = (offset, initial) => {
