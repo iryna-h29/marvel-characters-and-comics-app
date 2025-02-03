@@ -67,7 +67,7 @@ const App = () => {
                             <Suspense fallback={<Spinner/>}>
                                 <Routes>
                                     <Route path='/' element={<MainPage/>}/>
-                                    <Route path='/:charId' element={<MainPage/>}/>
+                                    {/* <Route path='/#charId' element={<MainPage/>}/> */}
                                     <Route path='/comics' element={<ComicsPage/>}/>
                                     <Route path='/comics/:id' element={<SinglePage Component={SingleComicPage} dataType='comic'/>}/>
                                     <Route path="/characters/:id" element={<SinglePage Component={SingleCharPage} dataType='character'/>}/>

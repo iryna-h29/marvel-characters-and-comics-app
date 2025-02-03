@@ -5,21 +5,18 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 import useMarvelService from '../../services/MarvelService';
 import charContext from '../../context/context';
 import './charList.scss';
+import { Link } from 'react-router-dom';
 
 const setContent = (process, Component, newItemLoading) => {
     switch (process) {
         case 'waiting':
             return <Spinner/>;
-            break;
         case 'loading':
             return newItemLoading ? <Component/> : <Spinner/>;
-            break;
         case 'confirmed':
             return <Component/>;
-            break;
         case 'error':
             return <ErrorMessage/>;
-            break;
         default:
             throw new Error('Unexpected process state');
     }
@@ -129,14 +126,15 @@ const CharItem = (props) => {
         if (myRef?.current) {
             if (id === context.selectedChar) {
                 myRef.current.classList.add('char__item-selected');
-                myRef.current.focus();
+                // myRef.current.focus(); // тут є проблема бо з фокусом стрибає сторінка коли лоуд натиск
             }
         }
       }, [myRef]);
 
     
     return (
-        <li ref={myRef} 
+        <Link to={`/#${id}`} ref={myRef}
+            href={id} 
             className="char__item" 
             tabIndex={0} 
             onClick={() => context.changeChar(id)}
@@ -147,7 +145,7 @@ const CharItem = (props) => {
             }}>
             <img src={thumbnail} alt={name} style={imageAvailability}/>
             <div className="char__name">{name}</div>
-        </li>
+        </Link>
     )
 }
 
