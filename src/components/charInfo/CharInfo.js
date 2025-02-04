@@ -1,44 +1,35 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+
 import useMarvelService from '../../services/MarvelService';
-import charContext from '../../context/context';
 import setContent from '../../utils/setContent';
 import './charInfo.scss';
 import PropTypes from 'prop-types';
 
-const CharInfo = () => {
+const CharInfo = (props) => {
+
+    const {characterId} = useParams();
+
     const [char, setChar] = useState(null);
     
     const {getCharacter, clearError, process, setProcess} = useMarvelService();
 
-    const context = useContext(charContext);
 
     useEffect(() => {
         updateChar();
-    }, []);
+        // eslint-disable-next-line
+    }, [props.charId]);
 
-    useEffect(() => {
-        updateChar();
-    }, [context.selectedChar])
-
-    // componentDidUpdate(prevProps, prevState) {
-    //     if (this.props.charId !== prevProps.charId) {
-    //         this.updateChar();
-    //     }
-    // }
    
     const updateChar = () => {
-        // const {charId} = props;
-        // if (!charId) {
-        //     return;
-        // }
-        if (!context.selectedChar) {
+        const {charId} = props;
+        if (!charId && !characterId) {
             return;
         }
         clearError();
         // props.charId
-        getCharacter(context.selectedChar)
+        getCharacter(charId || characterId)
             .then(onCharLoaded)
             .then(() => setProcess('confirmed'))
     }
@@ -47,11 +38,6 @@ const CharInfo = () => {
         setChar(char);
     }
 
-    
-    // const skeleton = char || loading || error ? null : <Skeleton/>;
-    // const spinner = loading ? <Spinner/> : null;
-    // const content = !(loading || error || !char) ? <View char={char}/> : null;
-    // const errorMessage = error ? <ErrorMessage/> : null;
 
     return (
         <div className="char__info">
@@ -62,7 +48,7 @@ const CharInfo = () => {
 
 
 const View = ({data}) => {
-    const {id, name, description, thumbnail, homepage, wiki, comics} = data;
+    const {name, description, thumbnail, homepage, wiki, comics} = data;
     const imageAvailability = !thumbnail.includes('image_not_available') ? {'objectFit' : 'cover'} : {'objectFit' : 'contain'};
     const scrolledListStyles = Array.isArray(comics) && comics.length > 1 ? {'overflowY' : 'scroll'} : null;
     return (
@@ -109,7 +95,7 @@ const View = ({data}) => {
     )
 }
 
-// CharInfo.propTypes = {
-//     charId: PropTypes.number
-// }
+CharInfo.propTypes = {
+    charId: PropTypes.number
+}
 export default CharInfo;

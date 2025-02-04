@@ -30,11 +30,19 @@
         padding: 15px;
         cursor: pointer;
         transition: 0.3s transform;
+        position: relative;
+        .char__link {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
         img {
             width: 200px;
             height: 200px;
             object-fit: cover;
-            transform: translate(-15px, -15px);
+            // transform: translate(-15px, -15px);
         }
         &:hover {
             transform: translateY(-8px);

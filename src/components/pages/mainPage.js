@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet";
 import RandomChar from "../randomChar/RandomChar";
 import CharList from "../charList/CharList";
@@ -11,11 +11,11 @@ import ErrorBoundary from '../errorBoundar/ErrorBoundary';
 const MainPage = () => {
 
 
-    // const [selectedChar, setChar] = useState(null);
+    const [selectedChar, setChar] = useState(null);
 
-    // const onCharSelected = (id) => {
-    //    setChar(id);
-    // }
+    const onCharSelected = (id) => {
+       setChar(id);
+    }
 
 
     return (
@@ -32,13 +32,11 @@ const MainPage = () => {
             </ErrorBoundary>
             <div className="char__content">
                 <ErrorBoundary>
-                    <CharList /> 
-                    {/* onCharSelected={onCharSelected} */}
+                    <CharList onCharSelected={onCharSelected}/> 
                 </ErrorBoundary>
                 <div className="char__content-sticky">
                     <ErrorBoundary>
-                        <CharInfo />
-                        {/* charId={selectedChar} */}
+                        <CharInfo charId={selectedChar}/>
                     </ErrorBoundary>
                     <ErrorBoundary>
                         <CharSearchForm/>

@@ -21,7 +21,6 @@ const {Provider} = charContext;
 
 const App = () => {
 
-    
     const [charObj, setChar] = useState({
         selectedChar: null,
         limit: 9,
@@ -63,18 +62,16 @@ const App = () => {
                 <div className="container">
                     <AppHeader/>
                     <main>
-                        <Provider value={charObj}>
-                            <Suspense fallback={<Spinner/>}>
-                                <Routes>
-                                    <Route path='/' element={<MainPage/>}/>
-                                    {/* <Route path='/#charId' element={<MainPage/>}/> */}
-                                    <Route path='/comics' element={<ComicsPage/>}/>
-                                    <Route path='/comics/:id' element={<SinglePage Component={SingleComicPage} dataType='comic'/>}/>
-                                    <Route path="/characters/:id" element={<SinglePage Component={SingleCharPage} dataType='character'/>}/>
-                                    <Route path='*' element={<Page404/>}/>
-                                </Routes>
-                            </Suspense>
-                        </Provider>
+                        <Suspense fallback={<Spinner/>}>
+                            <Routes>
+                                <Route path='/' element={<MainPage/>}/>
+                                <Route path='/:characterId' element={<MainPage/>}/>
+                                <Route path='/comics' element={<ComicsPage/>}/>
+                                <Route path='/comics/:id' element={<SinglePage Component={SingleComicPage} dataType='comic'/>}/>
+                                <Route path="/characters/:id" element={<SinglePage Component={SingleCharPage} dataType='character'/>}/>
+                                <Route path='*' element={<Page404/>}/>
+                            </Routes>
+                        </Suspense>
                     </main>
                 </div>
                 {/* {loadedMain ? <img className="bg-decoration" src={decoration} alt="vision"/>: null}  */}
