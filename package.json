@@ -1,6 +1,6 @@
 {
-  "homepage": "https://iryna-h29.github.io/marvel-app",
-  "name": "knihovna",
+  "homepage": "https://iryna-h29.github.io/marvel-characters-and-comics-app",
+  "name": "marvel-characters-and-comics-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
