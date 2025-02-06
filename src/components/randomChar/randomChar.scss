@@ -43,6 +43,11 @@
         a:nth-child(1) {
             margin-right: 30px;
         }
+        @media (max-width: 950px) {
+            a:nth-child(2) {
+                margin-top: 5px;
+            }
+        }
     }
     &__static {
         padding: 40px 35px;
@@ -51,6 +56,9 @@
         button {
             margin-top: 13px;
         }
+        // @media (max-width: 800px) {
+        //     padding: 20px 15px;
+        // }
     }
     &__title {
         font-weight: bold;
@@ -60,12 +68,18 @@
         color: #FFFFFF;
         &:nth-child(2) {
             margin-top: 33px;
+            // z-index: 5;
+            position: relative;
+            @media (max-width: 700px) {
+                margin-top: 10px;
+            }
         }
     }
     &__decoration {
         position: absolute;
         bottom: 14px;
         right: -37px;
+        // z-index: 1;
     }
     @media(max-width: 1170px) {
         grid-template-columns: 60% 40%;

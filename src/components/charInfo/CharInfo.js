@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Helmet } from "react-helmet";
 import { Link, useParams } from 'react-router-dom';
-
 import useMarvelService from '../../services/MarvelService';
 import setContent from '../../utils/setContent';
 import './charInfo.scss';
 import PropTypes from 'prop-types';
+
 
 const CharInfo = (props) => {
 
@@ -38,16 +38,22 @@ const CharInfo = (props) => {
         setChar(char);
     }
 
+    const closePopup = useCallback(() => {
+        setProcess('waiting');
+    }, []);
+
 
     return (
-        <div className="char__info">
-            {setContent(process, View, char)}
+        <div className={'char__info-wrapper '}>
+            <div className="char__info">
+                {setContent(process, View, char, closePopup)}
+            </div>
         </div>
     )
 }
 
 
-const View = ({data}) => {
+const View = ({data, func}) => {
     const {name, description, thumbnail, homepage, wiki, comics} = data;
     const imageAvailability = !thumbnail.includes('image_not_available') ? {'objectFit' : 'cover'} : {'objectFit' : 'contain'};
     const scrolledListStyles = Array.isArray(comics) && comics.length > 1 ? {'overflowY' : 'scroll'} : null;
@@ -72,6 +78,9 @@ const View = ({data}) => {
                             <div className="inner">Wiki</div>
                         </a>
                     </div>
+                </div>
+                <div className="close">
+                    <button className='close__btn' onClick={() => func()}>X</button>
                 </div>
             </div>
             <div className="char__descr">

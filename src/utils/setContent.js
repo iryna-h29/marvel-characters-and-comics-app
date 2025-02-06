@@ -3,7 +3,7 @@ import ErrorMessage from '../components/errorMessage/ErrorMessage';
 import Skeleton from '../components/skeleton/Skeleton';
 import { Component } from "react";
 
-const setContent = (process, Component, data) => {
+const setContent = (process, Component, data, func) => {
     switch (process) {
         case 'waiting':
             return <Skeleton/>;
@@ -12,7 +12,7 @@ const setContent = (process, Component, data) => {
             return <Spinner/>;
             break;
         case 'confirmed':
-            return <Component data={data}/>;
+            return <Component data={data} func={func}/>;
             break;
         case 'error':
             return <ErrorMessage/>;

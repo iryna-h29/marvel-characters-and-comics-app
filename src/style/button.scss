@@ -10,6 +10,10 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
+    @media (max-width: 680px) {
+        width: 90px;
+        min-width: 0;
+    }
     &__long {
         display: block;
         width: 170px;

@@ -12,7 +12,7 @@
         &-sticky {
             top: 10px;
             position: sticky;
-            // max-height: 70vh;
+            // max-height: 95vh;
         }
     }
 
@@ -89,5 +89,20 @@
             grid-template-columns: 1fr;
             justify-items: center;
         }
+    }
+    @media (max-width: 650px) {
+        &__content {
+            display: block;
+            // position: relative;
+            .char__grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        // &__item {
+        //     width: 30vw;
+        // }
+        // &__content-sticky {
+        //     display: none;
+        // }
     }
 }
