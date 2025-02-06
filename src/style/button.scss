@@ -14,6 +14,9 @@
         width: 90px;
         min-width: 0;
     }
+    @media(max-width: 300px) {
+        font-size: 12px;
+    }
     &__long {
         display: block;
         width: 170px;
@@ -25,6 +28,9 @@
         line-height: 18px;
         padding: 0 18px;
         transition: none;
+        @media(max-width: 300px) {
+            padding: 0 10px;
+        }
         &::before {
             border-color: $main-color transparent;
             border-style: solid;

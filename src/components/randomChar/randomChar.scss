@@ -125,4 +125,14 @@
             gap: 10px;
         }
     }
+    @media (max-width: 300px) {
+        &__btns {
+            flex-wrap: nowrap;
+            justify-content: left;
+            gap: 5px;
+            a:nth-child(1) {
+                margin-right: 10px;
+            }
+        }
+    }
 }
