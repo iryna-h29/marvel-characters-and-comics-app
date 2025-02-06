@@ -51,6 +51,9 @@ input::-webkit-inner-spin-button {
     padding: 50px 0 50px 0;
     position: relative;
     // overflow: hidden;
+    @media(max-width: 800px) {
+        padding: 20px 0 20px 0;
+    }
     .container {
         margin: 0 auto;
         position: relative;
@@ -70,6 +73,9 @@ input::-webkit-inner-spin-button {
 main {
     margin-top: 50px;
     position: relative;
+    @media(max-width: 800px) {
+        margin-top: 20px;
+    }
     @media (max-width: 650px) {
         margin-top: 10px;
         position: relative;

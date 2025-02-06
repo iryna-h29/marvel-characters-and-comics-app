@@ -8,6 +8,23 @@
         padding: 0 25px 0 45px;
         display: grid;
         grid-template-columns: 152px auto 133px;
+        @media (max-width:  800px) {
+            padding: 0 2px 0 2px;
+        }
+        @media(max-width: 340px) {
+            display: block;
+        }
+        @media (max-width: 550px) {
+            grid-template-columns: 100px auto 100px;
+            align-items: center;
+            img {
+                width: 100px;
+                height: 80px;
+                @media(max-width: 340px) {
+                    display: none;
+                }
+            }
+        }
         &-text {
             font-weight: bold;
             font-size: 24px;
@@ -15,6 +32,14 @@
             color: #FFFFFF;
             padding-left: 83px;
             padding-top: 18px;
+            @media(max-width: 680px) {
+                font-size: 18px;
+                padding-left: 10px;
+                
+            }
+            @media (max-width: 550px) {
+                line-height: normal;
+            }
         }
     }
 }
