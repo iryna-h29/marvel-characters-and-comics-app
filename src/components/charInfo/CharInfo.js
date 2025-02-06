@@ -92,7 +92,7 @@ const View = ({data, func}) => {
                     Array.isArray(comics) 
                     ? comics.map((item, i) => {
                         return (
-                            <Link to={`/comics/${item.resourceURI.split('/').pop()}`} key={i} className="char__comics-item">
+                            <Link to={`/marvel-characters-and-comics-app/comics/${item.resourceURI.split('/').pop()}`} key={i} className="char__comics-item">
                                 {item.name}
                             </Link>
                         )

@@ -64,11 +64,11 @@ const App = () => {
                     <main>
                         <Suspense fallback={<Spinner/>}>
                             <Routes>
-                                <Route path='/' element={<MainPage/>}/>
-                                <Route path='/:characterId' element={<MainPage/>}/>
-                                <Route path='/comics' element={<ComicsPage/>}/>
-                                <Route path='/comics/:id' element={<SinglePage Component={SingleComicPage} dataType='comic'/>}/>
-                                <Route path="/characters/:id" element={<SinglePage Component={SingleCharPage} dataType='character'/>}/>
+                                <Route path='/marvel-characters-and-comics-app' element={<MainPage/>}/>
+                                <Route path='/marvel-characters-and-comics-app/:characterId' element={<MainPage/>}/>
+                                <Route path='/marvel-characters-and-comics-app/comics' element={<ComicsPage/>}/>
+                                <Route path='/marvel-characters-and-comics-app/comics/:id' element={<SinglePage Component={SingleComicPage} dataType='comic'/>}/>
+                                <Route path="/marvel-characters-and-comics-app/characters/:id" element={<SinglePage Component={SingleCharPage} dataType='character'/>}/>
                                 <Route path='*' element={<Page404/>}/>
                             </Routes>
                         </Suspense>

@@ -6,7 +6,7 @@ const AppHeader = () => {
     return (
         <header className="app__header">
             <h1 className="app__title">
-                <Link to='/'>
+                <Link to='/marvel-characters-and-comics-app'>
                     <span>Marvel</span> information portal
                 </Link>
             </h1>
@@ -18,7 +18,7 @@ const AppHeader = () => {
                         style={({ isActive }) => ({
                             color: isActive ? "#9F0013" : "inherit",
                         })}
-                        to="/">Characters</NavLink>
+                        to="/marvel-characters-and-comics-app">Characters</NavLink>
                     </li>
                     /
                     <li>
@@ -26,7 +26,7 @@ const AppHeader = () => {
                         style={({ isActive }) => ({
                             color: isActive ? "#9F0013" : "inherit",
                         })}
-                        to="/comics">Comics</NavLink>
+                        to="/marvel-characters-and-comics-app/comics">Comics</NavLink>
                     </li>
                 </ul>
             </nav>
