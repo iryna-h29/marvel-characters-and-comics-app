@@ -51,7 +51,7 @@ const useMarvelService = () => {
 			pageCount: comics.pageCount
 				? `${comics.pageCount} p.`
 				: "No information about the number of pages",
-			thumbnail: comics.thumbnail.path + "." + comics.thumbnail.extension,
+			thumbnail: comics.thumbnail.path.replace('http', 'https') + "." + comics.thumbnail.extension,
 			language: comics.textObjects[0]?.language || "en-us",
 			// optional chaining operator
 			price: comics.prices[0].price
