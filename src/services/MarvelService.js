@@ -33,11 +33,12 @@ const useMarvelService = () => {
 
 
     const _transformCharacter = (char) => {
+        console.log(char.thumbnail.path);
         return {
             id: char.id,
             name: char.name,
             description: char.description || "There is no information about this character",
-            thumbnail: char.thumbnail.path + '.' + char.thumbnail.extension,
+            thumbnail: char.thumbnail.path.replace('http', 'https') + '.' + char.thumbnail.extension,
             homepage: char.urls[0].url,
             wiki: char.urls[1].url,
             comics: char.comics.items.length > 0 ? char.comics.items.slice(0, 10) : "There is no comics with this character"
