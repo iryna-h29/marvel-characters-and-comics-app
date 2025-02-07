@@ -33,7 +33,6 @@ const useMarvelService = () => {
 
 
     const _transformCharacter = (char) => {
-        console.log(char.thumbnail.path);
         return {
             id: char.id,
             name: char.name,
