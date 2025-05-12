@@ -165,7 +165,7 @@ const CharItem = ({item, onCharSelected, loadingNewItems}) => {
                     selectOnItem();
                 }
             }}>
-            <Link to={`/${id}`} 
+            <Link to={`/characters/${id}`} 
                 tabIndex={-1}
                 className='char__link'>
                 <img src={thumbnail} alt={name} style={imageAvailability} tabIndex={-1}/>

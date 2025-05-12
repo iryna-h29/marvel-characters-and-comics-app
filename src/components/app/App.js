@@ -1,5 +1,5 @@
 import { lazy, Suspense, useContext, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
 import AppHeader from "../appHeader/AppHeader";
 import Spinner from '../spinner/Spinner';
@@ -64,11 +64,12 @@ const App = () => {
                     <main>
                         <Suspense fallback={<Spinner/>}>
                             <Routes>
-                                <Route path='/' element={<MainPage/>}/>
-                                <Route path='/:characterId' element={<MainPage/>}/>
+                                <Route path="/" element={<Navigate to="/characters" replace />} />
+                                <Route path='/characters' element={<MainPage/>}/>
+                                <Route path='/characters/:characterId' element={<MainPage/>}/>
                                 <Route path='/comics' element={<ComicsPage/>}/>
                                 <Route path='/comics/:id' element={<SinglePage Component={SingleComicPage} dataType='comic'/>}/>
-                                <Route path="/characters/:id" element={<SinglePage Component={SingleCharPage} dataType='character'/>}/>
+                                <Route path="/characters/:id/info" element={<SinglePage Component={SingleCharPage} dataType='character'/>}/>
                                 <Route path='*' element={<Page404/>}/>
                             </Routes>
                         </Suspense>
