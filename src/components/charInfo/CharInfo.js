@@ -95,7 +95,7 @@ const View = ({data, func}) => {
                         // item.resourceURI.split('/').pop()
                         // item.name
                         return (
-                            <Link to={`/marvel-characters-and-comics-app/comics/${item.resouceURI}`} key={i} className="char__comics-item"> 
+                            <Link to={`/comics/${item.resouceURI}`} key={i} className="char__comics-item"> 
                                 {item}
                             </Link>
                         )

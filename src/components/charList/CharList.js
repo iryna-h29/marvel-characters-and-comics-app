@@ -165,7 +165,7 @@ const CharItem = ({item, onCharSelected, loadingNewItems}) => {
                     selectOnItem();
                 }
             }}>
-            <Link to={`/marvel-characters-and-comics-app/${id}`} 
+            <Link to={`/${id}`} 
                 tabIndex={-1}
                 className='char__link'>
                 <img src={thumbnail} alt={name} style={imageAvailability} tabIndex={-1}/>
