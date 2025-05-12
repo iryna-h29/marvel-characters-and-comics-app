@@ -12,7 +12,7 @@ import setContent from '../../utils/setContent';
 // А если вынесем их все в App.js - то они будут одни на все страницы
 
 const SinglePage = ({Component, dataType}) => {
-        const {id} = useParams();
+        const {id} = useParams(); 
         const [data, setData] = useState(null);
         const {getComics, getCharacter, clearError, process, setProcess} = useMarvelService();
 

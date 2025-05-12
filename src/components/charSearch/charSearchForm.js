@@ -18,7 +18,9 @@ const CharSearchForm = () => {
 
     const updateChar = (name) => {
         clearError();
-
+        // because new db case-sensitive:
+        name = name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        console.log(name);
         getCharacterByName(name)
             .then(onCharLoaded)
             .then(() => setProcess('confirmed'));

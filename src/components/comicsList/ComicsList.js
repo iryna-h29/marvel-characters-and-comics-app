@@ -91,7 +91,7 @@ const ComicsItem = ({item}) => {
 
     return (    
         <li className="comics__item" tabIndex={0} >
-            <Link to={`/comics/${id}`}>
+            <Link to={`/marvel-characters-and-comics-app/comics/${id}`}>
                 <img src={thumbnail} alt="ultimate war" className="comics__item-img"/>
                 <div className="comics__item-name">{name}</div>
                 <div className="comics__item-price">{price}</div>

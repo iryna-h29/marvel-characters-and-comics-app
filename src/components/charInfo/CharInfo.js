@@ -39,7 +39,8 @@ const CharInfo = (props) => {
     }
 
     const closePopup = useCallback(() => {
-        setProcess('waiting');
+        const charInfoEl = document.querySelector('.char__info-wrapper');
+        charInfoEl.classList.remove("open");
     }, []);
 
 
@@ -91,9 +92,11 @@ const View = ({data, func}) => {
                 {
                     Array.isArray(comics) 
                     ? comics.map((item, i) => {
+                        // item.resourceURI.split('/').pop()
+                        // item.name
                         return (
-                            <Link to={`/marvel-characters-and-comics-app/comics/${item.resourceURI.split('/').pop()}`} key={i} className="char__comics-item">
-                                {item.name}
+                            <Link to={`/marvel-characters-and-comics-app/comics/${item.resouceURI}`} key={i} className="char__comics-item"> 
+                                {item}
                             </Link>
                         )
                     }) 

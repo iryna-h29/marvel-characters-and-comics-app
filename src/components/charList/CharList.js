@@ -30,7 +30,7 @@ const CharList = (props) => {
 
     const [charList, setCharList] = useState([]);
     const [newItemLoading, setNewItemLoading] = useState(false);
-    const [offset, setOffset] = useState(210);
+    const [offset, setOffset] = useState(0); // 210
     const [charEnded, setCharEnded] = useState(false);
     const [loadingNewItems, setLoadingNewItems] = useState(false);
 
@@ -53,13 +53,13 @@ const CharList = (props) => {
 
     const onCharLoaded = async(newList) => {
         let ended = false;
-        if (newList.length < 9) {
+        if (newList.length < 6) {
             ended = true;
         }
         setCharList(charList => [...charList, ...newList]);
         setNewItemLoading(false);
         // setLoadingNewItems(false);
-        setOffset(offset => offset + 9);
+        setOffset(offset => offset + 6);
         setCharEnded(ended);
     }
 
@@ -140,11 +140,12 @@ const CharItem = ({item, onCharSelected, loadingNewItems}) => {
 
 
     const selectOnItem = () => {
-        // setLoadingNewItems(false);
         if (!myRef?.current.classList.contains('char__item-selected')) {
             myRef?.current.classList.add('char__item-selected');
             myRef?.current.focus();
         }
+        const charInfoEl = document.querySelector('.char__info-wrapper');
+        charInfoEl.classList.add("open");
     }
 
     
