@@ -8,20 +8,16 @@ import xMen from '../../resources/img/x-men.png';
 import { Component, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const setContent = (process, Component, newItemLoading) => {
+const setContent = (process, Component, newItemLoading, errorMsg) => {
     switch (process) {
         case 'waiting':
             return <Spinner/>;
-            break;
         case 'loading':
             return newItemLoading ? <Component/> : <Spinner/>;
-            break;
         case 'confirmed':
             return <Component/>;
-            break;
         case 'error':
-            return <ErrorMessage/>;
-            break;
+            return <ErrorMessage message={errorMsg || "Something went wrong"}/>;
         default:
             throw new Error('Unexpected process state');
     }

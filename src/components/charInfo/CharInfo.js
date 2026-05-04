@@ -94,8 +94,9 @@ const View = ({data, func}) => {
                     ? comics.map((item, i) => {
                         // item.resourceURI.split('/').pop()
                         // item.name
+                        // Link to item.resouceURI
                         return (
-                            <Link to={`/comics/${item.resouceURI}`} key={i} className="char__comics-item"> 
+                            <Link to={`/comics/${i + 1}`} key={i} className="char__comics-item">  
                                 {item}
                             </Link>
                         )

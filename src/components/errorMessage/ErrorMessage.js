@@ -1,10 +1,13 @@
 import img from './error.gif';
 
-const ErrorMessage = () => {
+const ErrorMessage = (message) => {
     return (
-        <img src={img}
-        style={{ display: 'block', width: '250px', height: '250px', objectFit: 'contain', margin: "0 auto"}}
-        alt='Error'/>
+        <div>
+            <h2>${message}</h2>
+            <img src={img}
+            style={{ display: 'block', width: '250px', height: '250px', objectFit: 'contain', margin: "0 auto"}}
+            alt='Error'/>
+        </div>
     )
 }
 

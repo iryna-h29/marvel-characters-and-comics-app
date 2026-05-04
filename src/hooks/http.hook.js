@@ -3,6 +3,7 @@ import { useState, useCallback } from "react";
 
 export const useHttp = () => {
     const [process, setProcess] = useState('waiting');
+    const [errorMsg, setErrorMsg] = useState(null);
 
     // headers 'Content-Type': 'application/json'
     const request = useCallback(async (url, method = 'GET', body = null, headers = {}) => {
@@ -22,6 +23,7 @@ export const useHttp = () => {
 
         } catch(e) {
             setProcess('error');
+            setErrorMsg(e.message);
             throw e;
         }
 
@@ -31,5 +33,5 @@ export const useHttp = () => {
         setProcess('loading');
     }, []);
 
-    return {request, clearError, process, setProcess};
+    return {request, clearError, process, setProcess, errorMsg};
 }
